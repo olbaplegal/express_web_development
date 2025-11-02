@@ -22,3 +22,10 @@ função não é ativada quando o servidor liga, mas sim toda vez que um usuári
 app.get("/", function(req, res){
     res.send("<h1>Hello World!<h1>") //Nesse caso a resposta do server foi um h1 com o conteúdo
 })
+
+/*
+Método listen diz a aplicação para começar a "escutar" por requisições HTTP da rede
+*/
+app.listen(8081, function(){
+    console.log('Servidor está funcionando!')
+})
