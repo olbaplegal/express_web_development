@@ -26,3 +26,16 @@ const pool = mysql.createPool({
     database: 'crud_express_mysql'
 });
 console.log('Pool de conexões com MySQL criado com sucesso');
+
+// ROTAS DA APLICAÇÃO
+// SELECT
+app.get('/', (req, res) => {
+    const sql = 'select * from produtos'; // query select
+    pool.query(sql, (erro, dadosTabela) => { // passando a query como argumento e retornado ou o erro ou os dados da tebela
+        if(erro){
+            console.log('Erro na query SELECT: ', erro);
+            return res.status(500).send('Erro ao busca dados'); // resposta da requisição
+        }
+        res.render('produtos', {produtos: dadosTabela}) // mandando a lista pro ejs
+    });
+});
