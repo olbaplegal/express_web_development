@@ -87,3 +87,17 @@ app.post('/atualizar/:id', (req, res) => {
         res.redirect('/'); // redirecionando para raiz
     });
 });
+
+// DELETE
+app.post('/deletar/:id', (req, res) => {
+    const { id } = req.params;
+    const sql = 'DELETE FORM produtos WHERE id = ?';
+    pool.query(sql, [id], (erro, resultado) => {
+        if(erro){
+            console.log('Erro na query DELETE: ', erro);
+            return res.status(500).send('Erro ao deletar os dados');
+        }
+        console.log('Produto deletado com seucesso')
+        res.redirect('/') // redirecionado para raiz
+    });
+});
