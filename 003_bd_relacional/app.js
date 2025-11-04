@@ -10,3 +10,10 @@ const mysql = require('mysql2'); // importando mysql
 const app = express(); // criando uma instancia do express
 const port = 3000; // porta
 
+// middlware que processa dados do HTML
+// urlencoded(): processa dados no formato de url
+// {extended:true} permite objetos complexos 
+app.use(express.urlencoded({extended:true}));
+
+app.set('view engine', 'ejs'); // configurando o view engine como ejs
+app.use(express.static('public')) // middleware para arquivos estaticos
