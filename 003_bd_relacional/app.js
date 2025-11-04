@@ -70,3 +70,20 @@ app.get('/editar/:id', (req, res) => {
         res.render('edit_produtos', {produto : dadosTabela[0]}); // mandando os dados pro edit_produtos.ejs
     });
 });
+
+// ROTA PARA ATUALIZAR O PRODUTO - UPDATE
+// O objeto req.params contém os parâmetros da rota
+//Neste caso, req.params será { id:'1'} se a URL for /atualizar/1
+app.post('/atualizar/:id', (req, res) => {
+    const { id } = req.params; // pega o parametro id que ta na url
+    const { nome, preco, descricao } = req.body;
+    const sql = 'UPDATE produtos SET nome = ?, preco = ?, descricao = ? WHERE id = ?';
+    pool.query(sql, [nome, preco, descricao, id], erro, resultado => {
+        if(erro){
+            console.log('Erro na query UPDATE: ', erro);
+            return res.status(500).send('Erro ao atualizar od dados');
+        }
+        console.log('Produto atualizado com sucesso');
+        res.redirect('/'); // redirecionando para raiz
+    });
+});
