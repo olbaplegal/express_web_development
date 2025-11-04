@@ -55,3 +55,18 @@ app.post('/adicionar', (req, res) => {
         res.redirect('/'); // redirecionando para raiz
     });
 });
+
+// ROTA PARA A EXIBIÇÃO DO FORMULARIO - UPDATE
+app.get('/editar/:id', (req, res) => {
+    const { id } = req.params;
+    const sql = 'SELECT * FROM produtos WHERE id = ?';
+    pool.query(sql, [id], (erro, dadosTabela) => {
+        if(erro){
+            console.log('Erro na query SELECT por ID: ', erro);
+            return res.status(500).send('Erro ao buscar dados para edição');
+        } if (dadosTabela.length === 0){
+            return res.status(404).send('Produto não encontrado');
+        }
+        res.render('edit_produtos', {produto : dadosTabela[0]}); // mandando os dados pro edit_produtos.ejs
+    });
+});
