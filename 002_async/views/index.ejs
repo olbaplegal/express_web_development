@@ -11,7 +11,7 @@
         <p>Este HTML foi gerado no servidor pelo Express e EJS</p>
     
         <ul id="lista-usuarios">
-            <% if (usuarios.legth > 0) { %>
+            <% if (usuarios.length > 0) { %>
                 <% usuarios.forEach(usuario => { %>
                     <li>
                         <span><%= usuario.nome %></span>
