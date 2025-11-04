@@ -13,6 +13,7 @@ const port = 3000; // porta
 // middlware que processa dados do HTML
 // urlencoded(): processa dados no formato de url
 // {extended:true} permite objetos complexos 
+// faz um parssing entre entre o tipo que é mandado na url para objeto java script
 app.use(express.urlencoded({extended:true}));
 
 app.set('view engine', 'ejs'); // configurando o view engine como ejs
@@ -37,5 +38,20 @@ app.get('/', (req, res) => {
             return res.status(500).send('Erro ao busca dados'); // resposta da requisição
         }
         res.render('produtos', {produtos: dadosTabela}) // mandando a lista pro ejs
+    });
+});
+
+// CREATE
+// req.body é o objeto que contém os dados enviados pelo formulário.
+app.post('/adicionar', (req, res) => {
+    const {nome, preco, descricao} = req.body;
+    const sql = 'INSERT INTO produtos (nome, preco, descricao) VALUES (?, ?, ?)';
+    pool.query(sql, [nome, preco, descricao], (erro, resultado) => {
+        if(erro){
+            console.log('Erro na query INSERT: ', erro);
+            return res.status(500).send('Erro ao adicionar dados');
+        }
+        console.log('Produto adicionado com sucesso');
+        res.redirect('/'); // redirecionando para raiz
     });
 });
