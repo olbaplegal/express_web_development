@@ -19,3 +19,10 @@ app.set('view engine', 'ejs'); // Configurando o EJS como motor de visualizaçã
 app.set('views', path.join(__dirname, 'views')); // configurando views
 
 app.use(express.static(path.join(__dirname, 'public'))); // configurando arquivo statico
+
+// Simulação do BD
+const usuarios = [
+    {id:1, nome: "Juliana Silva", email: "ju.silva@gmail.com"},
+    {id:2, nome: "Bruno Souza", email: "bruno.souza@outlook.com"},
+    {id:3, nome: "Carla Fernandes", email: "carla.fer@yagoo.com"}
+];
