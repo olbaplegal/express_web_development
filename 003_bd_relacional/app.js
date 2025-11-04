@@ -78,7 +78,7 @@ app.post('/atualizar/:id', (req, res) => {
     const { id } = req.params; // pega o parametro id que ta na url
     const { nome, preco, descricao } = req.body;
     const sql = 'UPDATE produtos SET nome = ?, preco = ?, descricao = ? WHERE id = ?';
-    pool.query(sql, [nome, preco, descricao, id], erro, resultado => {
+    pool.query(sql, [nome, preco, descricao, id], (erro, resultado) => {
         if(erro){
             console.log('Erro na query UPDATE: ', erro);
             return res.status(500).send('Erro ao atualizar od dados');
@@ -91,7 +91,7 @@ app.post('/atualizar/:id', (req, res) => {
 // DELETE
 app.post('/deletar/:id', (req, res) => {
     const { id } = req.params;
-    const sql = 'DELETE FORM produtos WHERE id = ?';
+    const sql = 'DELETE FROM produtos WHERE id = ?';
     pool.query(sql, [id], (erro, resultado) => {
         if(erro){
             console.log('Erro na query DELETE: ', erro);
