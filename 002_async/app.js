@@ -26,3 +26,12 @@ const usuarios = [
     {id:2, nome: "Bruno Souza", email: "bruno.souza@outlook.com"},
     {id:3, nome: "Carla Fernandes", email: "carla.fer@yagoo.com"}
 ];
+
+// ROTAS
+// Rota root
+app.get('/', (req, res)=>{
+    // res.render(): método que processa e envia pro view
+    // index é o nome do arquivo html
+    // {usuarios: usuarios}: dados que serão passados pro template
+    res.render('index', {usuarios: usuarios}) // Renderiza um template EJS e envia pro navegador
+});
