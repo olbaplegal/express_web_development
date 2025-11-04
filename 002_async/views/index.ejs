@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Usuários</h1>
+        <p>Este HTML foi gerado no servidor pelo Express e EJS</p>
+    
+        <ul id="lista-usuarios">
+            <% if (usuarios.legth > 0) { %>
+                <% usuarios.forEach(usuario => { %>
+                    <li>
+                        <span><%= usuario.nome %></span>
+                        <span><%= usuario.email %></span>
+                    </li>
+                <% }) %>
+            <% } else { %>
+                <li>Nenhum usuário encontrado</li>
+            <% } %>
+        </ul>
+    </div>
+</body>
+</html>
