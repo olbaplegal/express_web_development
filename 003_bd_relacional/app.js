@@ -101,3 +101,17 @@ app.post('/deletar/:id', (req, res) => {
         res.redirect('/') // redirecionado para raiz
     });
 });
+
+app.listen(port, () => {
+    const url = `http://localhost:${port}`;
+    console.log(`Servidor rodadndo em http://localhost:${port}`);
+
+    (async () => {
+        try {
+            const openModule = await import('open');
+            await openModule.default(url);
+        } catch (error) {
+            console.error('Erro ao tentar abrir o navegador:', error);
+        }
+    })();
+});
