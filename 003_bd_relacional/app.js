@@ -17,3 +17,12 @@ app.use(express.urlencoded({extended:true}));
 
 app.set('view engine', 'ejs'); // configurando o view engine como ejs
 app.use(express.static('public')) // middleware para arquivos estaticos
+// conexão com o mysql
+const pool = mysql.createPool({
+    connectionLimit: 10,
+    host: 'localhost',
+    user: 'root',
+    password: 'password',
+    database: 'crud_express_mysql'
+});
+console.log('Pool de conexões com MySQL criado com sucesso');
