@@ -35,3 +35,28 @@ app.get('/', (req, res)=>{
     // {usuarios: usuarios}: dados que serão passados pro template
     res.render('index', {usuarios: usuarios}) // Renderiza um template EJS e envia pro navegador
 });
+
+// SERVIDOR
+/*
+O código dentro do () => {...}: É executado apenas uma vez, assim que o servidor está pronto
+
+Bloco (async () => {...})(): Código que abre o seu navegador padrão automaticamente na página http://localhost:8081
+*/
+app.listen(port, () => {
+    const url = `http://localhost:${port}`;
+    console.log(`Servidor rodando em http://localhost:${port}`);
+
+    (async () => {
+        try {
+            // await pausa a execução somente dentro da função async específica
+            // 1º pausa: o await pausa a execução do async até que 'import('open')' seja finalizado(carregado)
+            const openModule = await import('open');
+            // o código aqui só executa depois que a importação acima terminar
+
+            // 2º pausa: pare a execução async até que a função de abrir o navegador termine
+            await openModule.default(url);
+        } catch (error) {
+            console.error('Erro ao tentar abrir o navegador:', error);
+        }
+    })();
+});
