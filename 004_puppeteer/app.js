@@ -20,5 +20,22 @@ async function scrap(){
         password: 'password',
         database: 'biblioteca'
     };
-    
+
+    let browser;
+    let connection;
+
+    /*
+    puppeteer.launch({ headless: "new" }): Inicia uma instância do navegador. A
+    opção headless: "new" faz com que o navegador rode em segundo plano, ou seja,
+    sem interface gráfica visível.
+
+    headless: false -> Abre o navegador (Interface gráfica visível)
+    */
+
+    try{
+        browser = await puppeteer.launch({ headless: false });
+        const page = await browser.newPage(); // Abre uma nova aba do navegador
+        await page.goto("http://books.toscrape.com/");
+        
+    }
 }
