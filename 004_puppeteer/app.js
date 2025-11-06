@@ -103,6 +103,18 @@ async function scrap(){
         // A função evaluate revebe a mensagem e a executa dentro do navegador
         await page.evaluate((message) => {
             alert(msg);
-        }, successMessage)
+        }, successMessage);
+
+    } catch(error){
+        console.error("Ocorreu um erro!", error);
+    } finally{
+        if(connection){
+            await connection.end();
+            console.log("Conexão com o MySQL fechada");
+        }
+        if(browser){
+            await browser.close();
+            console.log("Navegador fechado!")
+        }
     }
 }
