@@ -81,5 +81,10 @@ async function scrap(){
        const exchange_rate = resposta_axios.data.rates.BRL;
        console.log(`Cotação atual: 1 Libra = ${exchange_rate}  BRL`);
        
+       // Conexão com o banco de dados
+       connection = await mysql.createConnection(dbConfig);
+       console.log('Conexão com o BD estabelecida');
+
+       
     }
 }
