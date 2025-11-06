@@ -32,10 +32,31 @@ async function scrap(){
     headless: false -> Abre o navegador (Interface gráfica visível)
     */
 
-    try{
+    try {
         browser = await puppeteer.launch({ headless: false });
-        const page = await browser.newPage(); // Abre uma nova aba do navegador
+        const page = await browser.newPage(); // abre uma nova aba do navegador
         await page.goto("http://books.toscrape.com/");
         
+        // Aguarda o elemetno .product_pod ser carregado na página
+        await page.waitForSelector('.product_pod');
+        /*
+        O código dentro da função abaixo não é executado no ambiente Node.js, 
+        mas sim no console do navegador, ou seja, no contexto da página que foi
+        carregada.
+        */
+       const resultado = await page.evaluate(() => {
+            const dadosLivro = [];
+
+            const elementos_livro = document.querySelectorAll('.product_pod');
+
+            // Interação sobre cada elemento do livro encontrado na página
+            elementos_livro.forEach((elementoLivro) => {
+                const titulo = elementoLivro.querySelector('h3 a').getAttribute('title');
+                const preco = elementoLivro.querySelector('.price_color').innerText;
+                const estoque = elementoLivro.querySelector('.instock.availability').innerText;
+
+                
+            })
+       })
     }
 }
