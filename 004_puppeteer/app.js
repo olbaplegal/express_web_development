@@ -93,7 +93,7 @@ async function scrap(){
             // Converte o valor para reais usando a cotação obtida acima
             const precoReais = precoLibras * exchange_rate;
 
-            const sql = 'insert into biblioteca.livros (livro, preco, estoque) values (?, ?, ?)';
+            const sql = 'insert into biblioteca.livros (titulo, preco, estoque) values (?, ?, ?)';
             await connection.execute(sql, [livro.titulo, precoReais.toFixed(2), livro.estoque]);
         }
 
@@ -101,7 +101,7 @@ async function scrap(){
         console.log(successMessage);
 
         // A função evaluate revebe a mensagem e a executa dentro do navegador
-        await page.evaluate((message) => {
+        await page.evaluate((msg) => {
             alert(msg);
         }, successMessage);
 
