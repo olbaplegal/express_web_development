@@ -55,8 +55,17 @@ async function scrap(){
                 const preco = elementoLivro.querySelector('.price_color').innerText;
                 const estoque = elementoLivro.querySelector('.instock.availability').innerText;
 
-                
-            })
-       })
+                // Monstar um objeto com titulo, preco e estoque e adiciona ao array
+                // dadosLivro
+                dadosLivro.push({
+                    titulo: titulo,
+                    preco: preco,
+                    estoque: estoque
+                });
+            });
+            return dadosLivro;
+       });
+
+       
     }
 }
