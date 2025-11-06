@@ -11,7 +11,8 @@ npm install open
 
 const puppeteer = require("puppeteer");
 const mysql = require("mysql2/promise");
-const axios = require("axios")
+const axios = require("axios");
+const { message } = require("statuses");
 
 async function scrap(){
     const dbConfig = {
@@ -95,5 +96,13 @@ async function scrap(){
             const sql = 'insert into biblioteca.livros (livro, preco, estoque) values (?, ?, ?)';
             await connection.execute(sql, [livro.titulo, precoReais.toFixed(2), livro.estoque]);
         }
+
+        const successMessage = `Sucesso ${resultado.length} livros foram inseridos no BD`
+        console.log(successMessage);
+
+        // A função evaluate revebe a mensagem e a executa dentro do navegador
+        await page.evaluate((message) => {
+            alert(msg);
+        }, successMessage)
     }
 }
