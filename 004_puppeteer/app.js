@@ -85,6 +85,15 @@ async function scrap(){
        connection = await mysql.createConnection(dbConfig);
        console.log('Conexão com o BD estabelecida');
 
-       
+       for (const livro of resultado){
+            // Extrai o valor numérico em libras
+            const precoLibras = parseFloat(livro.preco.replace('£', ''));
+            
+            // Converte o valor para reais usando a cotação obtida acima
+            const precoReais = precoLibras * exchange_rate;
+
+            const sql = 'insert into biblioteca.livros (livro, preco, estoque) values (?, ?, ?)';
+            await connection.execute(sql, [livro.titulo, precoReais.toFixed(2), livro.estoque]);
+        }
     }
 }
