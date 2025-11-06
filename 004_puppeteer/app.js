@@ -66,6 +66,20 @@ async function scrap(){
             return dadosLivro;
        });
 
+// BANCO DE DADOS E CONVERSÃO DE MOEDA ULTILIZANDO AXIOS       
+       //axops.get(...): Faz uma requisição HTTP para a API de cotações.
+       //Base da URL: https://api.frankfurter.app/latest
+       console.log('Buscando a cotação de câmbio de libra para real');
+       const resposta_axios = await axios.get('https://api.frankfurter.app/latest')
+
+       /*
+       resposta_axios.data.rates.BRL: Axios retorna um objeto de resposta.
+       resposta_axios.data é o corpo da resposta em formato JSON.
+       Em rates.BRL pegamos o valor numérico da cotação.
+       */
+
+       const exchange_rate = resposta_axios.data.rates.BRL;
+       console.log(`Cotação atual: 1 Libra = ${exchange_rate}  BRL`);
        
     }
 }
